@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.ticker import FuncFormatter
+
+# Sample data
+names = ['S.binderi(January)', 'S. binderi(March)', 'P.pavonica(January)', 'P.pavonica(March)', 'P. tetrastromatica', 'H. clathratus', 'D.dichotoma(Large)', 'D.dichotoma(Small)']
+variable1 = [28, 27, 25, 15, 30, 19, 27, 28]
+variable2 = [35, 32, 21, 10, 28, 8, 24, 33]
+
+# Calculate the position of each bar on the x-axis
+bar_width = 0.5
+bar_positions = np.arange(len(names))
+
+# Create the stacked bar graph with aligned bars
+plt.bar(bar_positions, variable1, width=bar_width, label='Calcium Chloride Route', color='lightblue')
+plt.bar(bar_positions, [-val for val in variable2], width=bar_width, label='Formaldehyde Route', color='yellow')
+
+# Set axis labels and title
+plt.xlabel('Name of Seaweeds', fontname='Georgia', fontsize=12)
+plt.ylabel('Percentage (%)', fontname='Georgia', fontsize=12)
+plt.title('Calcium Chloride and Formaldehyde Routes', fontname='Georgia', fontsize=12)
+
+# Set x-axis tick labels
+plt.xticks(bar_positions, names, fontname='Georgia', fontsize=8, fontstyle='italic', rotation=45)
+
+# Remove minus signs from y-axis labels
+formatter = FuncFormatter(lambda x, pos: f'{abs(x):.0f}')
+plt.gca().yaxis.set_major_formatter(formatter)
+
+# Add legend
+plt.legend()
+
+# Show the plot
+plt.tight_layout()
+plt.show()
